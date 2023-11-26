@@ -1,0 +1,304 @@
+(gdb) target remote 192.168.7.2:2001
+Remote debugging using 192.168.7.2:2001
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+Reading symbols from target:/lib/ld-linux-armhf.so.3...
+Reading /lib/17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading /lib/.debug/17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading /usr/lib/debug//lib/17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading /usr/lib/debug/lib//17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading target:/usr/lib/debug/lib//17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+(No debugging symbols found in target:/lib/ld-linux-armhf.so.3)
+
+Program received signal SIGTRAP, Trace/breakpoint trap.
+0xb6fd5a80 in ?? () from target:/lib/ld-linux-armhf.so.3
+(gdb) run
+The "remote" target does not support "run".  Try "help target" or "continue".
+(gdb) continue
+Continuing.
+Reading /lib/arm-linux-gnueabihf/libc.so.6 from remote target...
+Reading /lib/arm-linux-gnueabihf/fa6f904e3b8301fcfa82eccd2c02f3b18a1bda.debug from remote target...
+Reading /lib/arm-linux-gnueabihf/.debug/fa6f904e3b8301fcfa82eccd2c02f3b18a1bda.debug from remote target...
+Reading /usr/lib/debug//lib/arm-linux-gnueabihf/fa6f904e3b8301fcfa82eccd2c02f3b18a1bda.debug from remote target...
+Reading /usr/lib/debug/lib/arm-linux-gnueabihf//fa6f904e3b8301fcfa82eccd2c02f3b18a1bda.debug from remote target...
+Reading target:/usr/lib/debug/lib/arm-linux-gnueabihf//fa6f904e3b8301fcfa82eccd2c02f3b18a1bda.debug from remote target...
+
+Breakpoint 1, main () at noworky.c:51
+51		printf("noworky: by Brian Fraser\n");
+(gdb) continue
+Continuing.
+
+Breakpoint 2, swapContent (d1=0x4125e0, d2=0x412638) at noworky.c:19
+19		*d1 = tmp;
+(gdb) print i
+No symbol "i" in current context.
+(gdb) list
+14	 */
+15	void swapContent(double *d1, double *d2)
+16	{
+17		double tmp = *d2;
+18		*d2 = *d1;
+19		*d1 = tmp;
+20	}
+21	
+22	/*
+23	 * Swap the contents of the two arrays.
+(gdb) print tmp
+$4 = 90
+(gdb) print d1
+$5 = (double *) 0x4125e0
+(gdb) print d2
+$6 = (double *) 0x412638
+(gdb) continue
+Continuing.
+
+Breakpoint 2, swapContent (d1=0x4125d8, d2=0x412630) at noworky.c:19
+19		*d1 = tmp;
+(gdb) list
+14	 */
+15	void swapContent(double *d1, double *d2)
+16	{
+17		double tmp = *d2;
+18		*d2 = *d1;
+19		*d1 = tmp;
+20	}
+21	
+22	/*
+23	 * Swap the contents of the two arrays.
+(gdb) bt d1
+#0  swapContent (d1=0x4125d8, d2=0x412630) at noworky.c:19
+#1  0x004005ee in tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:29
+#2  0x004006f2 in main () at noworky.c:72
+(gdb) up
+#1  0x004005ee in tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:29
+29			swapContent(array1+i, array2+i);
+(gdb) list
+24	 */
+25	void tradeArrays(double *array1, double *array2, int size)
+26	{
+27		unsigned int i;
+28		for (i = size-1; i >= 0; i--) {
+29			swapContent(array1+i, array2+i);
+30		}
+31	}
+32	
+33	/*
+(gdb) print i
+$7 = 8
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) list
+23	 * Swap the contents of the two arrays.
+24	 */
+25	void tradeArrays(double *array1, double *array2, int size)
+26	{
+27		unsigned int i;
+28		for (i = size-1; i >= 0; i--) {
+29			swapContent(array1+i, array2+i);
+30		}
+31	}
+32	
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125d0, d2=0x412628) at noworky.c:19
+19		*d1 = tmp;
+(gdb) next
+20	}
+(gdb) print d1
+$8 = (double *) 0x4125d0
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$9 = 7
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125c8, d2=0x412620) at noworky.c:19
+19		*d1 = tmp;
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$10 = 6
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125c0, d2=0x412618) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x4125c0
+d2 = 0x412618
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$11 = 5
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125b8, d2=0x412610) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x4125b8
+d2 = 0x412610
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$12 = 4
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) info args
+array1 = 0x412598
+array2 = 0x4125f0
+size = 10
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125b0, d2=0x412608) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x4125b0
+d2 = 0x412608
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$13 = 3
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) info args
+array1 = 0x412598
+array2 = 0x4125f0
+size = 10
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125a8, d2=0x412600) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x4125a8
+d2 = 0x412600
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x4125a0, d2=0x4125f8) at noworky.c:19
+19		*d1 = tmp;
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$14 = 1
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) info args
+array1 = 0x412598
+array2 = 0x4125f0
+size = 10
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x412598, d2=0x4125f0) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x412598
+d2 = 0x4125f0
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$15 = 0
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x412590, d2=0x4125e8) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x412590
+d2 = 0x4125e8
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$16 = 4294967295
+(gdb) next
+29			swapContent(array1+i, array2+i);
+(gdb) info args
+array1 = 0x412598
+array2 = 0x4125f0
+size = 10
+(gdb) next
+
+Breakpoint 2, swapContent (d1=0x412588, d2=0x4125e0) at noworky.c:19
+19		*d1 = tmp;
+(gdb) info args
+d1 = 0x412588
+d2 = 0x4125e0
+(gdb) next
+20	}
+(gdb) next
+tradeArrays (array1=0x412598, array2=0x4125f0, size=10) at noworky.c:28
+28		for (i = size-1; i >= 0; i--) {
+(gdb) print i
+$17 = 4294967294
+(gdb) list
+23	 * Swap the contents of the two arrays.
+24	 */
+25	void tradeArrays(double *array1, double *array2, int size)
+26	{
+27		unsigned int i;
+28		for (i = size-1; i >= 0; i--) {
+29			swapContent(array1+i, array2+i);
+30		}
+31	}
+32	
+(gdb) quit
+A debugging session is active.
+
+	Inferior 1 [process 1613] will be killed.
+
+Quit anyway? (y or n) y
+caleb@351-debian:~/cmpt433/work/as2$ gdb-multiarch -q ~/cmpt433/public/Assignment_2/noworky 
+Reading symbols from /home/caleb/cmpt433/public/Assignment_2/noworky...
+(gdb) target remote 192.168.7.2:2001
+Remote debugging using 192.168.7.2:2001
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+warning: File transfers from remote targets can be slow. Use "set sysroot" to access files locally instead.
+Reading /lib/ld-linux-armhf.so.3 from remote target...
+Reading symbols from target:/lib/ld-linux-armhf.so.3...
+Reading /lib/17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading /lib/.debug/17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading /usr/lib/debug//lib/17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading /usr/lib/debug/lib//17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+Reading target:/usr/lib/debug/lib//17f0bca2ae53f327681aa4c81f6d849c5d5fe2.debug from remote target...
+(No debugging symbols found in target:/lib/ld-linux-armhf.so.3)
+0xb6fd5a80 in ?? () from target:/lib/ld-linux-armhf.so.3
+(gdb) continue
+Continuing.
