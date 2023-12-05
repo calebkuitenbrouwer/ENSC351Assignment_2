@@ -76,7 +76,7 @@ int main() {
 
         switch (direction) {
         case 0:
-            printf("CENTERED)\n");
+            printf("CENTERED\n");
             break;
         case 1:
             printf("UP\n");
