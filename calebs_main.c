@@ -36,7 +36,7 @@ int main() {
         int dipsCount = analysisData.dips;
         double maxVoltage =  analysisData.maxVoltage;
         double minVoltage = analysisData.minVoltage;
-        doulbe minInterval = analysisData.minInterval;
+        double minInterval = analysisData.minInterval;
         double maxInterval = analysisData.maxInterval;
         
 
