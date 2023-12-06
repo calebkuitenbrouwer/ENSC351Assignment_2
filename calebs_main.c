@@ -32,6 +32,12 @@ int main() {
             break;
         }
 
+        int dipsCount = analysisData.dips;
+        double maxVoltage =  analysisData.maxVoltage;
+        double minVoltage = analysisData.minVoltage;
+        doulbe minInterval = analysisData.minInterval;
+        double maxInterval = analysisData.maxInterval;
+        
 
         char bus[] = "/dev/i2c-1";
 
