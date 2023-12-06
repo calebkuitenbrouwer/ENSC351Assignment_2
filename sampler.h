@@ -9,6 +9,20 @@ typedef struct {
 } samplerDatapoint_t;
 // Begin/end the background thread which samples light levels.
 double getVoltageValue(void);  // Function prototype
+class data {
+ public:
+  int dips;
+  int samples;
+  float minVoltage;
+  float maxVoltage;
+  float avgVoltage;
+  float minInterval;
+  float maxInterval;
+  float avgInterval;
+
+}
+  
+
 
 void Sampler_startSampling(void);
 void Sampler_stopSampling(void);
