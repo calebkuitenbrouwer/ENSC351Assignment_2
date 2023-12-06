@@ -58,7 +58,7 @@ int main() {
             break;
         }
 
-        usleep(100 * 1000);  // Sleep for 100ms
+        sleep(1);  
     }
 
     return 0;
