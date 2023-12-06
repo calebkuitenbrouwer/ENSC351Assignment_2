@@ -31,6 +31,7 @@ int main() {
             handleExit();
             break;
         }
+        sleep(1);  
 
         int dipsCount = analysisData.dips;
         double maxVoltage =  analysisData.maxVoltage;
@@ -64,7 +65,6 @@ int main() {
             break;
         }
 
-        sleep(1);  
     }
 
     return 0;
