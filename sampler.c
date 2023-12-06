@@ -128,6 +128,7 @@ void *analysisFunction(void *arg)
     double previousAverage = 0.0;
     int dipCount = 0; 
     printf("Starting to sample data...\n");
+    data analysisData;
     while (Sample_Status)
     {
         sleepForMs(1000);
@@ -198,6 +199,16 @@ void *analysisFunction(void *arg)
             // printf("Number of dips detected: %d\n", dipCount);
             // printf("\n");
 
+
+            analysisData.minVoltage = Minimum_Voltage;
+            analysisData.maxVoltage = Maximum_Voltage;
+            analysisData.avgVoltage = Voltage_Average;
+            analysisData.dips = dipCount;
+            analysisData.samples = Samples_Analyzed;
+            analysisData.minInterval = Minimum_Interval;
+            analysisData.maxInterval = Maximum_Interval;
+            analysisData.avgInterval = Averagae_Interval;
+            
             free(extractedValues);
             Minumum_Interval = LLONG_MAX;
             Maximum_Interval = 0;
@@ -209,6 +220,7 @@ void *analysisFunction(void *arg)
     }
 
     pthread_exit(NULL);
+    return analysisData;
 }
 
 void Sampler_startSampling(void)
