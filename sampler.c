@@ -127,6 +127,7 @@ void *analysisFunction(void *arg)
 {
     double previousAverage = 0.0;
     int dipCount = 0; 
+    printf("Starting to sample data...\n");
     while (Sample_Status)
     {
         sleepForMs(1000);
@@ -187,13 +188,15 @@ void *analysisFunction(void *arg)
                 }
             }
 
-
-            printf("Analysis results:\n");
-            printf("Number of samples analyzed: %lld\n", Samples_Analyzed);
-            printf("Interval time (ms): (%7f, %7f) avg=%.7f\n", (double)Minumum_Interval / 1000000, (double)Maximum_Interval / 1000000, Averagae_Interval / 1000000.0);
-            printf("Samples Voltage (V): (%.2f, %.2f) avg=%.2f\n", Minimum_Voltage, Maximum_Voltage, Voltage_Average);
-            printf("Number of dips detected: %d\n", dipCount);
-            printf("\n");
+            
+            printf("Interval ms (%d, %d)  avg=%d\tSamples V (%d, %d)  avg=%d\t# Dips:\t%d\t# Samples:\t%d\n", (double)Minimum_Interval / 1000000, (double)Maximum_Interval / 1000000, Average_Interval / 1000000.0, Minimum_Voltage, Maximum_Voltage, Voltage_Average, dipCount, Samples_Analyzed);
+            
+            // printf("Analysis results:\n");
+            // printf("Number of samples analyzed: %lld\n", Samples_Analyzed);
+            // printf("Interval time (ms): (%7f, %7f) avg=%.7f\n", (double)Minumum_Interval / 1000000, (double)Maximum_Interval / 1000000, Averagae_Interval / 1000000.0);
+            // printf("Samples Voltage (V): (%.2f, %.2f) avg=%.2f\n", Minimum_Voltage, Maximum_Voltage, Voltage_Average);
+            // printf("Number of dips detected: %d\n", dipCount);
+            // printf("\n");
 
             free(extractedValues);
             Minumum_Interval = LLONG_MAX;
