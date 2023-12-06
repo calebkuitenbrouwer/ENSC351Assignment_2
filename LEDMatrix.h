@@ -1,30 +1,18 @@
-// LEDMatrix.h
+#ifndef LEDMATRIX_H
+#define LEDMATRIX_H
 
-#ifndef _LEDMATRIXH
-#define _LEDMATRIXH
+#define I2C_DEVICE_ADDRESS 0x27 
 
-// Enum to specify the type of data to display on the LED matrix
 typedef enum {
-    INT,    // Integer data type
-    DOUBLE  // Double data type
+    INT,
+    DOUBLE
 } DataType;
 
-// Function prototype for illuminating the LED matrix
-void illuminateLED(char* I2C_FilePath, void* number, DataType type);
+void writeToDisplay(int display, unsigned char address, unsigned char value);
+void updateDisplay(int display, unsigned char led[8]);
+int initializeDisplay(char* bus, int address);
+void initializeLED(unsigned char led[8], int number);
+void initializeFloatLED(unsigned char led[8], float f);
+void displayNext(char* bus, void* number, DataType type);
 
-// Description: Writes a value to the specified register of the I2C device
-static void writeI2cRegister(int i2cFileDesc, unsigned char regAddr, unsigned char value);
-
-// Description: Displays the LED pattern on the 8x8 LED matrix
-static void displayLED(int i2cFileDesc, unsigned char ledData[8]);
-
-// Description: Initializes the I2C communication with the specified address
-static int initializeI2c(char* bus, int address);
-
-// Description: Initializes the LED pattern for an integer number
-static void initializeLEDPatternInt(unsigned char ledData[8], int number);
-
-// Description: Initializes the LED pattern for a floating-point number
-static void initializeLEDPatternFloat(unsigned char ledData[8], float f);
-
-#endif /* LED_MATRIX_H */
+#endif /* LEDMATRIX_H */
