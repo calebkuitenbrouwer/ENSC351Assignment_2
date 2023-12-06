@@ -9,7 +9,6 @@
 #include "LEDMatrix.h"
 #include "joystick.h"
 
-#define JOYSTICK_THRESHOLD 0.5
 
 //#define USER_Button_Value "/sys/class/gpio/gpio72/value"
 
@@ -33,11 +32,13 @@ int main() {
         }
         sleep(1);  
 
-        int dipsCount = analysisData.dips;
-        double maxVoltage =  analysisData.maxVoltage;
-        double minVoltage = analysisData.minVoltage;
-        double minInterval = analysisData.minInterval;
-        double maxInterval = analysisData.maxInterval;
+        struct AnalysisData currentAnalysisData = Sampler_getAnalysisData();
+
+        int dipsCount = currentAnalysisData.dips;
+        double maxVoltage =  currentAnalysisData.maxVoltage;
+        double minVoltage = currentAnalysisData.minVoltage;
+        double minInterval = currentAnalysisData.minInterval;
+        double maxInterval = currentAnalysisData.maxInterval;
         
 
         char bus[] = "/dev/i2c-1";
